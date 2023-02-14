@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rwe.tongji_follow_up.mapper.LabTestMapper">
+    <resultMap id="detailLabTestResultMap" type="com.rwe.tongji_follow_up.model.dto.DetailLabTestDTO">
+        <result property="cycleId" column="cycle_id"/>
+        <association property="inflammationIndicators" javaType="com.rwe.tongji_follow_up.model.InflammationIndicators" autoMapping="true"/>
+        <association property="bloodTest" javaType="com.rwe.tongji_follow_up.model.BloodTest" autoMapping="true"/>
+        <association property="bloodBiochemistry" javaType="com.rwe.tongji_follow_up.model.BloodBiochemistry" autoMapping="true"/>
+        <association property="coagulationFunction" javaType="com.rwe.tongji_follow_up.model.CoagulationFunction" autoMapping="true"/>
+        <association property="arterialBloodGas" javaType="com.rwe.tongji_follow_up.model.ArterialBloodGas" autoMapping="true"/>
+        <association property="specialInspection" javaType="com.rwe.tongji_follow_up.model.SpecialInspection" autoMapping="true"/>
+        <association property="microbiome" javaType="com.rwe.tongji_follow_up.model.Microbiome" autoMapping="true"/>
+        <association property="rheumatism14" javaType="com.rwe.tongji_follow_up.model.Rheumatism14" autoMapping="true"/>
+        <association property="lymphocyteSubsets" javaType="com.rwe.tongji_follow_up.model.LymphocyteSubsets" autoMapping="true"/>
+        <association property="cellFactor" javaType="com.rwe.tongji_follow_up.model.CellFactor" autoMapping="true"/>
+        <association property="immune" javaType="com.rwe.tongji_follow_up.model.Immune" autoMapping="true"/>
+        <association property="gmTest" javaType="com.rwe.tongji_follow_up.model.GmTest" autoMapping="true"/>
+        <association property="tuberculosisInfectionTCellTest" javaType="com.rwe.tongji_follow_up.model.TuberculosisInfectionTCellTest" autoMapping="true"/>
+        <association property="molecular" javaType="com.rwe.tongji_follow_up.model.Molecular" autoMapping="true"/>
+        <association property="sciResearchProject" javaType="com.rwe.tongji_follow_up.model.SciResearchProject" autoMapping="true"/>
+    </resultMap>
+
+    <select id="getDetailLabTestBySampleIds" parameterType="java.util.List" resultMap="detailLabTestResultMap">
+        select lab_test.cycle_id as cycle_id,
+            inflammation_indicators.*,
+            blood_test.*,
+            blood_biochemistry.*,
+            coagulation_function.*,
+            arterial_blood_gas.*,
+            special_inspection.*,
+            microbiome.*,
+            rheumatism_14.*,
+            lymphocyte_subsets.*,
+            cell_factor.*,
+            immune.*,
+            gm_test.*,
+            tuberculosis_infection_t_cell_test.*,
+            molecular.*,
+            sci_research_project.*
+        from cycle,lab_test,inflammation_indicators,blood_test,blood_biochemistry,coagulation_function,arterial_blood_gas
+            ,special_inspection,microbiome,rheumatism_14,lymphocyte_subsets,cell_factor,immune,gm_test,tuberculosis_infection_t_cell_test
+            ,molecular,sci_research_project
+        where lab_test.id=inflammation_indicators.lab_test_id and
+            lab_test.id=blood_test.lab_test_id and
+            lab_test.id=blood_biochemistry.lab_test_id and
+            lab_test.id=coagulation_function.lab_test_id and
+            lab_test.id=arterial_blood_gas.lab_test_id and
+            lab_test.id=special_inspection.lab_test_id and
+            lab_test.id=microbiome.lab_test_id and
+            lab_test.id=rheumatism_14.lab_test_id and
+            lab_test.id=lymphocyte_subsets.lab_test_id and
+            lab_test.id=cell_factor.lab_test_id and
+            lab_test.id=immune.lab_test_id and
+            lab_test.id=gm_test.lab_test_id and
+            lab_test.id=tuberculosis_infection_t_cell_test.lab_test_id and
+            lab_test.id=molecular.lab_test_id and
+            lab_test.id=sci_research_project.lab_test_id and
+            cycle.id=lab_test.cycle_id and
+            cycle.type in (1,2,7) and
+            cycle.sample_id in
+        <foreach collection="sampleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

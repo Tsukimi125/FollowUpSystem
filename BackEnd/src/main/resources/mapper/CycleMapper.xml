@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rwe.tongji_follow_up.mapper.CycleMapper">
+    <resultMap id="detailAdmissionCycleResultMap" type="com.rwe.tongji_follow_up.model.dto.DetailAdmissionCycleDTO">
+        <result property="sampleId" column="sample_id"/>
+        <result property="cycleId" column="cycle_id"/>
+        <result property="cycleName" column="cycle_name"/>
+        <association property="vitalSigns" javaType="com.rwe.tongji_follow_up.model.VitalSigns" autoMapping="true"/>
+        <association property="psychiatricRatingScale" javaType="com.rwe.tongji_follow_up.model.PsychiatricRatingScale" autoMapping="true"/>
+    </resultMap>
+
+    <resultMap id="detailFollowUpCycleResultMap" type="com.rwe.tongji_follow_up.model.dto.DetailFollowUpCycleDTO">
+        <result property="cycleId" column="cycle_id"/>
+        <result property="sampleId" column="sample_id"/>
+        <result property="cycleName" column="cycle_name"/>
+        <association property="psychiatricRatingScale" javaType="com.rwe.tongji_follow_up.model.PsychiatricRatingScale" autoMapping="true"/>
+    </resultMap>
+
+    <select id="getDetailAdmissionCycleBySampleIds" parameterType="java.util.List" resultMap="detailAdmissionCycleResultMap">
+        select cycle.sample_id as sample_id,cycle.id as cycle_id,cycle.name as cycle_name , vital_signs.*,psychiatric_rating_scale.*
+        from cycle,vital_signs,psychiatric_rating_scale
+        where cycle.id=vital_signs.cycle_id and cycle.id=psychiatric_rating_scale.cycle_id and cycle.type in (1,2,7)
+        and cycle.sample_id in
+        <foreach collection="sampleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by field(cycle.type,1,7,2) ,cycle.create_time;
+    </select>
+
+    <select id="getDetailFollowUpCycleBySampleIds" parameterType="java.util.List" resultMap="detailFollowUpCycleResultMap">
+        select cycle.id as cycle_id,cycle.name as cycle_name,cycle.sample_id as sample_id,psychiatric_rating_scale.*
+        from cycle,psychiatric_rating_scale
+        where cycle.id=psychiatric_rating_scale.cycle_id and cycle.type in (3,4,5,6) and cycle.sample_id in
+        <foreach collection="sampleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by cycle.type;
+    </select>
+
+
+</mapper>

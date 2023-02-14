@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rwe.tongji_follow_up.mapper.TreatmentEffectMapper">
+    <resultMap id="treatmentEffectResultMap" type="com.rwe.tongji_follow_up.model.dto.SampleTreatmentEffectDTO">
+        <result column="sample_id" property="sampleId"/>
+        <association property="treatmentEffect" javaType="com.rwe.tongji_follow_up.model.TreatmentEffect" autoMapping="true"/>
+    </resultMap>
+
+    <select id="getTreatmentEffectBySampleIds" parameterType="java.util.List" resultMap="treatmentEffectResultMap">
+        select cycle.sample_id,treatment_effect.*
+        from cycle,treatment_effect
+        where cycle.id=treatment_effect.cycle_id and cycle.type=2 and cycle.sample_id in
+        <foreach collection="sampleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

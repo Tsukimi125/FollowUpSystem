@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rwe.tongji_follow_up.mapper.ConditionScoreMapper">
+    <resultMap id="conditionSampleIdResultMap" type="com.rwe.tongji_follow_up.model.dto.SampleConditionScoreDTO">
+        <result column="sample_id" property="sampleId"/>
+        <association property="conditionScore" javaType="com.rwe.tongji_follow_up.model.ConditionScore" autoMapping="true"/>
+    </resultMap>
+
+    <select id="getConditionBySampleIds" parameterType="java.util.List" resultMap="conditionSampleIdResultMap">
+        select cycle.sample_id as sample_id,condition_score.*
+        from cycle,condition_score
+        where condition_score.cycle_id=cycle.id and cycle.type=1 and cycle.sample_id in
+        <foreach collection="sampleIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

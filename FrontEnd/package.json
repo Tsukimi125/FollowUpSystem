@@ -1,0 +1,87 @@
+{
+  "name": "fus_front",
+  "version": "1.0.2",
+  "private": true,
+  "scripts": {
+    "commit": "git-cz",
+    "release": "standard-version",
+    "dev": "npm run start:dev",
+    "start": "cross-env REACT_APP_ENV=dev UMI_ENV=dev umi dev",
+    "start:dev": "cross-env REACT_APP_ENV=dev UMI_ENV=dev MOCK=none umi dev",
+    "start:prod": "cross-env REACT_APP_ENV=prod UMI_ENV=prod MOCK=none umi dev",
+    "build": "umi build",
+    "build:dev": "cross-env REACT_APP_ENV=dev UMI_ENV=dev umi build",
+    "build:prod": "cross-env REACT_APP_ENV=prod UMI_ENV=prod umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "analyze": "cross-env ANALYZE=1 umi build",
+    "test": "umi test",
+    "test:all": "node ./tests/run-tests.js",
+    "test:component": "umi test ./src/components",
+    "test:coverage": "umi-test --coverage"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://218.4.143.148/rwe/fus-frontend.git"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
+  "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "@ant-design/pro-layout": "^6.4.19",
+    "@ant-design/pro-table": "2.9.7",
+    "@types/js-cookie": "^2.2.6",
+    "@types/lodash": "^4.14.182",
+    "@umijs/test": "^3.4.3",
+    "ant-design-draggable-modal": "^1.0.0",
+    "antd": "^4.20.0",
+    "immer": "^9.0.6",
+    "js-cookie": "^2.2.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.0",
+    "react": "^16.12.0",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-dom": "^16.12.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-infinite-scroller": "^1.2.4",
+    "reqwest": "^2.0.5",
+    "umi": "^3.4.20",
+    "umi-request": "^1.3.5",
+    "use-immer": "^0.6.0",
+    "yorkie": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "@umijs/fabric": "^2.2.2",
+    "@umijs/preset-react": "^1.8.7",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "commitizen": "^4.2.4",
+    "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.8.1",
+    "lint-staged": "^11.0.0",
+    "prettier": "2.1.2",
+    "standard-version": "^9.3.0"
+  }
+
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rwe.tongji_follow_up.mapper.SampleMapper">
+    <select id="listSample" resultType="com.rwe.tongji_follow_up.model.Sample">
+        select * from sample where is_delete=0 order by create_time desc limit #{limit} offset #{offset};
+    </select>
+
+    <update id="updateSample" parameterType="com.rwe.tongji_follow_up.model.Sample">
+        update sample set update_time=now(),
+                          hospital=#{hospital},
+                          hospital_number=#{hospitalNumber},
+                          admission_date=#{admissionDate},
+                          phone=#{phone},
+                          name=#{name},
+                          sex=#{sex},
+                          age=#{age},
+                          height=#{height},
+                          weight=#{weight},
+                          bmi=#{bmi},
+                          marital_status=#{maritalStatus},
+                          education=#{education},
+                          occupation=#{occupation} where id=#{id} and is_delete=0;
+    </update>
+
+    <insert id="createSample" parameterType="com.rwe.tongji_follow_up.model.Sample">
+        insert into sample(create_time, update_time, hospital, hospital_number, admission_date, phone,
+                           name, sex, age, height, weight, bmi, marital_status, education, occupation, user_id)
+                           values (now(),now(),#{hospital},#{hospitalNumber},#{admissionDate},#{phone},#{name},
+                                   #{sex},#{age},#{height},#{weight},#{bmi},#{maritalStatus},#{education},#{occupation},#{userId});
+        <selectKey order="AFTER" keyProperty="id" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
+    </insert>
+
+    <update id="softDeleteSample" parameterType="java.lang.Integer">
+        update sample set is_delete=1 where id=#{sampleId};
+    </update>
+
+    <update id="submitSample" parameterType="java.lang.Integer">
+        update sample set is_submit=1 where id=#{sampleId} and is_delete=0;
+    </update>
+
+    <select id="countSample" resultType="java.lang.Integer">
+        select count(*) from sample where is_delete=0;
+    </select>
+</mapper>

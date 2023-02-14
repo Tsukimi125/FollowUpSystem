@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: dev
+
+jwt:
+  secret: 1gq6gq6gq48t-r-489h1dfg5-teq489gdf1-56weq4t89q-t4q894t8qw
+  expired: 8640000
+
