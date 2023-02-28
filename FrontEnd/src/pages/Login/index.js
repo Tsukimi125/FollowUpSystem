@@ -42,49 +42,12 @@ const Login = (props) => {
         history.push('/');
       }
     });
-    // } else if (current === 'auth') {
-    //   dispatch({
-    //     type: 'login/login',
-    //     payload: { ...values },
-    //   }).then(ret => {
-    //     if (ret) {
-    //       message.success('权限系统登录成功！');
-    //       history.push('/auth');
-    //     }
-    //   });
-    // }
   };
 
-  // handleChangeLogin = key => {
-  //   const { setFieldsValue } = this.props.form;
-
-  //   setFieldsValue({
-  //     account: '',
-  //     password: '',
-  //   });
-  //   this.setState({ current: key });
-  // };
-
-  // render() {
-  // const { getFieldDecorator } = this.props.form;
-  // const { current } = this.state;
   const submitLoading = loading.effects['login/login'];
 
   return (
     <div className={styles.login_bg}>
-      {/* <div className={styles.switchButton}>
-          {current === 'project' ? (
-            <Button type="link" onClick={() => this.handleChangeLogin('auth')}>
-              管理员登录
-              <Icon type="caret-right" />
-            </Button>
-          ) : (
-            <Button type="link" onClick={() => this.handleChangeLogin('project')}>
-              普通用户登录
-              <Icon type="caret-right" />
-            </Button>
-          )}
-        </div> */}
       <Content className={styles.bodyContent}>
         <div className={styles.form_title}>
           基于脓毒症研究的临床信息记录平台
@@ -129,11 +92,6 @@ const Login = (props) => {
           </Button>
         </Form>
       </Content>
-
-      <div className={styles.footer}>
-        <span>技术支持电话：18071146158</span>
-        {/* <span>如电话繁忙，请通过邮箱进行咨询：Rayplus@ray-sg.com</span> */}
-      </div>
     </div>
   );
 };

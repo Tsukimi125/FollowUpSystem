@@ -690,22 +690,6 @@ const FuvListPage: React.FC<FuvListProps> = (props) => {
       <div
         style={{ maxWidth: '1600px', marginLeft: 'auto', marginRight: 'auto', paddingTop: '1rem' }}
       >
-        {/* <div
-          style={{
-            padding: '1rem',
-            marginBottom: '1rem',
-            border: '1px solid #f0f0f0',
-          }}
-        >
-          <Button type="primary" style={{ marginLeft: 0 }}>
-            <a href={RBAC_URL}>
-              <LeftOutlined /> 返回
-            </a>
-          </Button>
-          <div style={{ display: 'inline-block', marginLeft: '1rem' }}>
-            <span style={{ fontSize: '18px', fontWeight: 'bold' }}>光谷同济随访系统</span>
-          </div>
-        </div> */}
         <ProTable
           // loading={userAuths.only_specimenInfo?SpecimenListLoading:FuvListLoading}
           loading={FuvListLoading}
