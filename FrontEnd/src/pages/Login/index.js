@@ -56,7 +56,7 @@ const Login = (props) => {
           form={form}
           onFinish={handleSubmit}
           className={styles.login_form}
-          // ref={this.formRef}
+        // ref={this.formRef}
         >
           <Form.Item
             name="account"
@@ -71,6 +71,7 @@ const Login = (props) => {
               size="large"
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="用户名"
+              // style={{ height: '3.5vh' }}
             />
           </Form.Item>
           <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
@@ -79,6 +80,7 @@ const Login = (props) => {
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
               placeholder="密码"
+              // style={{ height: '3.5vh' }}
             />
           </Form.Item>
           <Button
@@ -87,6 +89,7 @@ const Login = (props) => {
             htmlType="submit"
             loading={submitLoading}
             className={styles.login_form_button}
+            // style={{ height: '3.5vh' }}
           >
             登录
           </Button>

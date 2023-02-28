@@ -15,14 +15,16 @@
   background-color: rgba(255, 255, 255, 1);
   /* border-radius: 20px; */
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  width: 25vw;
-  height: 27vh;
+  width: 600px;
+  height: 360px;
+  /* border: 100px; */
   padding: 30px;
 }
 
 .login_bg {
   /* background-color: #39bbdb4a; */
   background-image: url(../../assets/background.jpg);
+  /* background-repeat: no-repeat; */
   height: 100vh;
 }
 
@@ -35,6 +37,7 @@
 
 .login_form {
   width: 350px;
+  /* width: 14vw; */
   margin: 0 auto;
 }
 
@@ -51,6 +54,7 @@
   text-align: center;
   margin-bottom: 30px;
   font-size: 32px;
+  /* font-size: 2.2vh; */
 }
 
 .footer {
