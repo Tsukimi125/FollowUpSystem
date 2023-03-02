@@ -667,22 +667,22 @@ const FuvListPage: React.FC<FuvListProps> = (props) => {
   // #endregion
 
   const exportDownload = () => {
-    message.warning('功能暂未开放');
-    // const ids = [...selectedRowKeys];
-    // if (ids.length === 0) {
-    //   message.info('未选择样本，请重新选择！');
-    //   return;
-    // }
-    // const option = {
-    //   method: 'POST',
-    //   dataType: 'blob',
-    //   url: `${GGTJ_API}/sample/export`,
-    //   data: {
-    //     sampleIds: ids,
-    //   },
-    //   fileName: '样本数据.xlsx',
-    // };
-    // FetchFile(option);
+    // message.warning('功能暂未开放');
+    const ids = [...selectedRowKeys];
+    if (ids.length === 0) {
+      message.info('未选择样本，请重新选择！');
+      return;
+    }
+    const option = {
+      method: 'POST',
+      dataType: 'blob',
+      url: `${GGTJ_API}/sample/export`,
+      data: {
+        sampleIds: ids,
+      },
+      fileName: '样本数据.xlsx',
+    };
+    FetchFile(option);
   };
 
   return (
